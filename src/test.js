@@ -1,3 +1,5 @@
+import { Taker } from './fetch';
+
 async function start() {
   return Promise.resolve('async is working');
 }
@@ -33,3 +35,17 @@ import('lodash').then(_ => {
   console.log('Lodash: ', _.random(0, 42, true));
   console.log('Dynamic import is working');
 });
+
+const taker = new Taker();
+
+taker
+  .get('https://jsonplaceholder.typicode.com/todos/1')
+  .then(data => console.log('getReq', data));
+
+taker
+  .post('https://jsonplaceholder.typicode.com/posts', {
+    title: 'foo',
+    body: 'bar',
+    userId: 1,
+  })
+  .then(data => console.log('postReq', data));
